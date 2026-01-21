@@ -1,0 +1,19 @@
+def rescue_row(board):
+    # Force visible match
+    last = board.grid[-1]
+    forced = last[0]
+    return [forced, forced] + last[2:]
+
+
+def cleanup_stragglers(board):
+    from engine.analyzer import straggler_rows
+    rows = straggler_rows(board)
+    if not rows:
+        return None
+
+    row = [0]*9
+    for r in rows:
+        val = next(x for x in board.grid[r] if x > 0)
+        row[0] = val
+        row[1] = val
+    return row
