@@ -1,0 +1,15 @@
+class Board:
+    COLS = 9
+
+    def __init__(self):
+        self.grid = []
+
+    def add_row(self, row):
+        assert len(row) == self.COLS
+        self.grid.append(row)
+
+    def get_all_cells(self):
+        return [(r, c) for r in range(len(self.grid)) for c in range(self.COLS)]
+
+    def get(self, r, c):
+        return self.grid[r][c]
