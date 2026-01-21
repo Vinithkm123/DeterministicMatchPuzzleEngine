@@ -1,0 +1,9 @@
+def simulate(level):
+    moves = 0
+    matches = 1
+
+    while matches > 0 and moves < 6:
+        moves += 1
+        matches -= 1
+
+    return moves
