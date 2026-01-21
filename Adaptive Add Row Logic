@@ -1,0 +1,28 @@
+from engine.difficulty import get_difficulty
+from engine.analyzer import count_matches
+from engine.rescue import rescue_row, cleanup_stragglers
+
+def generate_add_row(board, level, add_count, last_add_matches):
+    difficulty = get_difficulty(level)
+
+    # 🚑 Rescue condition
+    if level <= 3 and add_count >= 2 and last_add_matches == 0:
+        return rescue_row(board)
+
+    # 🧹 Straggler cleanup
+    cleanup = cleanup_stragglers(board)
+    if cleanup:
+        return cleanup
+
+    helpful = int((1 - difficulty) * 3)
+    row = []
+
+    # Helpful pairs
+    for _ in range(helpful):
+        row.extend([5,5])
+
+    # Fill rest with friction numbers
+    while len(row) < 9:
+        row.append((len(row) % 9) + 1)
+
+    return row[:9]
