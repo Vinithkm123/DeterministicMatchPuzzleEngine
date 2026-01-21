@@ -1,0 +1,11 @@
+from engine.seeding import seed_initial_board
+from engine.add_row import generate_add_row
+
+board = seed_initial_board(level=1)
+add_count = 0
+last_matches = 0
+
+while add_count < 6:
+    row = generate_add_row(board, 1, add_count, last_matches)
+    board.add_row(row)
+    add_count += 1
