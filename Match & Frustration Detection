@@ -1,0 +1,17 @@
+def is_match(a, b):
+    return a == b or a + b == 10
+
+
+def count_matches(board):
+    matches = 0
+    for r, c in board.get_all_cells():
+        for dr, dc in [(0,1), (1,0), (1,1)]:
+            nr, nc = r+dr, (c+dc) % board.COLS
+            if nr < len(board.grid):
+                if is_match(board.get(r,c), board.get(nr,nc)):
+                    matches += 1
+    return matches
+
+
+def straggler_rows(board):
+    return [i for i, row in enumerate(board.grid) if sum(x > 0 for x in row) <= 1]
